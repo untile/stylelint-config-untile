@@ -61,7 +61,7 @@ const NumberNoTrailingZeros = styled.div`
   top: 1px;
 `;
 
-// `order/properties-alphabetical-order`.
+// `order/properties-order`.
 const PropertiesAlphabeticalOrder = styled.div`
   color: red;
   display: block;

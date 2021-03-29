@@ -4,7 +4,7 @@ const AlphaValueNotation = styled.div`
   opacity: 50%;
 `;
 
-// `order/properties-alphabetical-order`.
+// `order/properties-order`.
 const PropertiesAlphabeticalOrder = styled.div`
   display: block;
   color: red;
