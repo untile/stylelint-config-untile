@@ -34,7 +34,7 @@ describe('stylelint-config-untile', () => {
 
         expect(errored).toBe(true);
         expect(warnings.map(({ rule }) => rule)).toMatchObject([
-          'order/properties-alphabetical-order',
+          'order/properties-order',
           'alpha-value-notation',
           'alpha-value-notation',
           'at-rule-no-unknown',
