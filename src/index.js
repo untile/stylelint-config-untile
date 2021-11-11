@@ -330,6 +330,9 @@ module.exports = {
     ],
     'selector-pseudo-element-case': 'lower',
     'selector-pseudo-element-colon-notation': 'double',
+    'selector-type-no-unknown': [true, {
+      ignoreTypes: ['$dummyValue']
+    }],
     'shorthand-property-no-redundant-values': true,
     'string-quotes': 'single',
     'unit-case': 'lower',
