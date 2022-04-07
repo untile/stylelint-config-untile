@@ -51,7 +51,7 @@ Simply add a `"rules"` key to your config, then add your overrides and additions
 
 ## Releases
 
-Be sure to have configured `GITHUB_TOKEN` in your globals.
+Be sure to have configured `NPM_TOKEN` in your globals.
 
 ```bash
 npm version [<new version> | major | minor | patch] -m "Release %s"
