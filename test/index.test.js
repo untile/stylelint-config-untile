@@ -8,83 +8,80 @@ import fs from 'fs';
 import stylelint from 'stylelint';
 
 /**
-  * `stylelint-config-untile` tests.
-  */
+ * `stylelint-config-untile` tests.
+ */
 
 describe('stylelint-config-untile', () => {
-  it('correct', () => {
-    return stylelint
-      .lint({
-        code: fs.readFileSync('./test/fixtures/correct.js', 'utf-8'), // eslint-disable-line no-sync
-        config
-      })
-      .then(result => {
-        expect(result.errored).toBe(false);
-      });
+  it('correct', async () => {
+    const result = await stylelint.lint({
+      code: fs.readFileSync('./test/fixtures/correct.js', 'utf-8'), // eslint-disable-line no-sync
+      config
+    });
+
+    expect(result.errored).toBeFalsy();
+    expect(result.results[0].warnings).toHaveLength(0);
   });
 
-  it('incorrect', () => {
-    return stylelint
-      .lint({
-        code: fs.readFileSync('./test/fixtures/incorrect.js', 'utf-8'), // eslint-disable-line no-sync
-        config
-      })
-      .then(({ errored, output }) => {
-        const warnings = JSON.parse(output)[0].warnings;
+  it('incorrect', async () => {
+    const result = await stylelint.lint({
+      code: fs.readFileSync('./test/fixtures/incorrect.js', 'utf-8'), // eslint-disable-line no-sync
+      config
+    });
 
-        expect(errored).toBe(true);
-        expect(warnings.map(({ rule }) => rule)).toMatchObject([
-          'order/properties-order',
-          'alpha-value-notation',
-          'alpha-value-notation',
-          'at-rule-no-unknown',
-          'block-no-empty',
-          'color-no-invalid-hex',
-          'declaration-block-no-duplicate-properties',
-          'declaration-block-semicolon-newline-after',
-          'declaration-block-semicolon-space-before',
-          'declaration-block-trailing-semicolon',
-          'declaration-colon-space-after',
-          'font-family-no-missing-generic-family-keyword',
-          'font-family-no-duplicate-names',
-          'function-calc-no-invalid',
-          'function-calc-no-invalid',
-          'function-calc-no-unspaced-operator',
-          'function-comma-space-after',
-          'function-comma-space-before',
-          'function-linear-gradient-no-nonstandard-direction',
-          'function-name-case',
-          'function-parentheses-newline-inside',
-          'function-parentheses-newline-inside',
-          'function-parentheses-space-inside',
-          'function-parentheses-space-inside',
-          'function-parentheses-space-inside',
-          'function-parentheses-space-inside',
-          'function-whitespace-after',
-          'length-zero-no-unit',
-          'media-feature-name-no-unknown',
-          'no-descending-specificity',
-          'no-extra-semicolons',
-          'number-leading-zero',
-          'number-no-trailing-zeros',
-          'property-case',
-          'property-no-unknown',
-          'property-no-vendor-prefix',
-          'rule-empty-line-before',
-          'selector-pseudo-class-no-unknown',
-          'selector-pseudo-element-case',
-          'selector-pseudo-element-colon-notation',
-          'selector-pseudo-element-no-unknown',
-          'selector-type-no-unknown',
-          'shorthand-property-no-redundant-values',
-          'string-no-newline',
-          'string-quotes',
-          'unit-case',
-          'unit-no-unknown',
-          'value-keyword-case',
-          'value-no-vendor-prefix',
-          'indentation'
-        ]);
-      });
+    const warnings = JSON.parse(result?.output)[0].warnings;
+
+    expect(result.errored).toBeTruthy();
+    expect(warnings.map(({ rule }) => rule)).toMatchObject([
+      'order/properties-order',
+      'alpha-value-notation',
+      'alpha-value-notation',
+      'at-rule-no-unknown',
+      'block-no-empty',
+      'color-no-invalid-hex',
+      'declaration-block-no-duplicate-properties',
+      'declaration-block-semicolon-newline-after',
+      'declaration-block-semicolon-space-before',
+      'declaration-block-trailing-semicolon',
+      'declaration-colon-space-after',
+      'font-family-no-missing-generic-family-keyword',
+      'font-family-no-duplicate-names',
+      'function-calc-no-invalid',
+      'function-calc-no-invalid',
+      'function-calc-no-unspaced-operator',
+      'function-comma-space-after',
+      'function-comma-space-before',
+      'function-linear-gradient-no-nonstandard-direction',
+      'function-name-case',
+      'function-parentheses-newline-inside',
+      'function-parentheses-newline-inside',
+      'function-parentheses-space-inside',
+      'function-parentheses-space-inside',
+      'function-parentheses-space-inside',
+      'function-parentheses-space-inside',
+      'function-whitespace-after',
+      'length-zero-no-unit',
+      'media-feature-name-no-unknown',
+      'no-descending-specificity',
+      'no-extra-semicolons',
+      'number-leading-zero',
+      'number-no-trailing-zeros',
+      'property-case',
+      'property-no-unknown',
+      'property-no-vendor-prefix',
+      'rule-empty-line-before',
+      'selector-pseudo-class-no-unknown',
+      'selector-pseudo-element-case',
+      'selector-pseudo-element-colon-notation',
+      'selector-pseudo-element-no-unknown',
+      'selector-type-no-unknown',
+      'shorthand-property-no-redundant-values',
+      'string-no-newline',
+      'string-quotes',
+      'unit-case',
+      'unit-no-unknown',
+      'value-keyword-case',
+      'value-no-vendor-prefix',
+      'indentation'
+    ]);
   });
 });
